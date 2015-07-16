@@ -24,10 +24,13 @@ namespace AutoClean
     class SafeObject final
     {
     public:
-        SafeObject() = delete;
+        SafeObject() : m_obj{ obj }
+        {
+        }
+
         SafeObject(const SafeObject &copy) = delete;
 
-        SafeObject(const T &obj) : m_obj(obj)
+        SafeObject(const T &obj) : m_obj{ obj }
         {
         }
         
@@ -51,11 +54,6 @@ namespace AutoClean
 
         SafeObject &operator=(const SafeObject &copy) = delete;
 
-        const T operator()() const
-        {
-            return (T)m_obj;
-        }
-
         SafeObject &operator=(SafeObject &&obj)
         {
             if (IsValid())
@@ -69,7 +67,12 @@ namespace AutoClean
             return *this;
         }
 
-        const T &Get() const
+        T * const Ptr()
+        {
+            return &m_obj;
+        }
+
+        const T operator()() const
         {
             return m_obj;
         }

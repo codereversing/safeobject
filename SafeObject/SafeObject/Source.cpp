@@ -13,13 +13,13 @@ int main(int argc, char *argv[])
 
     fprintf(stderr, "Handle 1: %X\n"
         "Handle 2: %X\n",
-        handle1.Get(), handle2.Get());
+        handle1(), handle2());
 
     handle1 = std::move(handle2);
 
     fprintf(stderr, "Handle 1: %X\n"
         "Handle 2: %X\n",
-        handle1.Get(), handle2.Get());
+        handle1(), handle2());
 
     return 0;
 }
